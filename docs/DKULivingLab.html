@@ -81,7 +81,7 @@
 
         /* 5. 프로젝트 소개 섹션 */
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .project-card { background: white; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); transition: all 0.3s ease; display: flex; flex-direction: column; overflow: hidden; }
+        .project-card { background: white; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); transition: all 0.3s ease; display: flex; flex-direction: column; overflow: hidden; cursor: pointer; }
         .project-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,64,152,0.1); border-color: var(--secondary-color); }
         .project-image { width: 100%; height: 200px; }
         .project-image img { width: 100%; height: 100%; object-fit: cover; }
@@ -112,6 +112,25 @@
         footer { background: var(--text-main); color: white; padding: 60px 0; text-align: center; }
         footer p { max-width: 700px; margin: 0 auto; font-size: 1.05rem; opacity: 0.9; }
 
+        /* 9. 프로젝트 상세 모달 팝업 */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 20px; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { background: white; width: 100%; max-width: 1100px; max-height: 90vh; border-radius: 24px; overflow-y: auto; position: relative; transform: translateY(30px); transition: transform 0.3s ease; box-shadow: 0 25px 50px rgba(0,0,0,0.2); display: flex; flex-direction: column; }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.9); border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 1.8rem; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.2s; color: var(--text-main); line-height: 1; }
+        .modal-close:hover { background: var(--primary-color); color: white; transform: rotate(90deg); }
+        .modal-hero { width: 100%; height: 320px; background: #e2e8f0; position: relative; flex-shrink: 0; }
+        .modal-hero img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-body { display: grid; grid-template-columns: 4.5fr 5.5fr; gap: 40px; padding: 40px; }
+        .modal-left { background: var(--bg-light); border-radius: 16px; min-height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--border-color); flex-direction: column; }
+        .modal-left img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+        .modal-right { display: flex; flex-direction: column; }
+        .modal-title { font-size: 2.2rem; font-weight: 800; color: var(--primary-color); margin-bottom: 20px; line-height: 1.3; }
+        .modal-desc-text { font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; word-break: keep-all; flex-grow: 1; }
+        .modal-footer-links { margin-top: auto; padding-top: 25px; border-top: 1px solid var(--border-color); display: flex; gap: 15px; }
+        .btn-github { background: #181717; color: white; display: inline-flex; align-items: center; gap: 8px; box-shadow: none; border: 1px solid #181717; font-weight: 600; padding: 12px 24px; border-radius: 8px; text-decoration: none; transition: all 0.3s; }
+        .btn-github:hover { background: #000; color: white; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        
         /* 반응형 디자인 */
         @media (max-width: 768px) {
             .hero .container { grid-template-columns: 1fr; text-align: center; }
@@ -122,6 +141,10 @@
             .hero h2 { font-size: 1.2rem; }
             .hero-image-wrap { height: 250px; }
             section { padding: 50px 0; }
+            .modal-hero { height: 200px; }
+            .modal-body { grid-template-columns: 1fr; padding: 25px; gap: 25px; }
+            .modal-left { min-height: 250px; }
+            .modal-title { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -215,56 +238,56 @@
     <section id="projects" class="container">
         <h2 class="section-title fade-in">학생 프로젝트 소개</h2>
         <div class="project-grid">
-            <div class="project-card fade-in">
+            <div class="project-card fade-in" onclick="openProjectModal(this)" data-github="https://github.com/project-climate">
                 <div class="project-image img-placeholder"><span>🖼 프로젝트 이미지</span></div>
                 <div class="project-content">
                     <div class="project-title">기후보호대</div>
                     <p class="project-desc"><strong>우리 학교 기후 환경 매니저</strong><br><br>교내 에너지 데이터를 학생들이 직접 관찰·진단하고 개선 아이디어를 제안하는 참여형 기후환경 교육 플랫폼입니다.</p>
                 </div>
             </div>
-            <div class="project-card fade-in" style="transition-delay: 0.1s;">
+            <div class="project-card fade-in" style="transition-delay: 0.1s;" onclick="openProjectModal(this)" data-github="https://github.com/project-heatwave">
                 <div class="project-image img-placeholder"><span>🖼 프로젝트 이미지</span></div>
                 <div class="project-content">
                     <div class="project-title">해껏톤</div>
                     <p class="project-desc"><strong>시원한 길</strong><br><br>폭염 상황에서 체감온도, 그늘, 쉼터 정보를 종합해 ‘덜 더운 길’을 추천하는 사용자 맞춤형 경로 안내 서비스입니다.</p>
                 </div>
             </div>
-            <div class="project-card fade-in" style="transition-delay: 0.2s;">
+            <div class="project-card fade-in" style="transition-delay: 0.2s;" onclick="openProjectModal(this)" data-github="https://github.com/project-walk">
                 <div class="project-image img-placeholder"><span>🖼 프로젝트 이미지</span></div>
                 <div class="project-content">
                     <div class="project-title">경기산책연구원</div>
                     <p class="project-desc"><strong>오늘의 길</strong><br><br>항공 LiDAR, GIS 데이터, 기상 실시간 API를 결합해 사용자 신체 조건과 환경에 맞는 건강 맞춤형 산책로 추천 웹 서비스입니다.</p>
                 </div>
             </div>
-            <div class="project-card fade-in" style="transition-delay: 0.3s;">
+            <div class="project-card fade-in" style="transition-delay: 0.3s;" onclick="openProjectModal(this)" data-github="https://github.com/project-espa">
                 <div class="project-image img-placeholder"><span>🖼 프로젝트 이미지</span></div>
                 <div class="project-content">
                     <div class="project-title">에스파(ESPA)</div>
                     <p class="project-desc"><strong>Net-Chain: 폐어망 업사이클링</strong><br><br>CCTV와 현장 사진을 AI로 분석해 폐어망 적치장의 수거 우선순위를 자동 산정하는 최적화 플랫폼입니다.</p>
                 </div>
             </div>
-            <div class="project-card fade-in">
+            <div class="project-card fade-in" onclick="openProjectModal(this)" data-github="https://github.com/project-tangtang">
                 <div class="project-image img-placeholder"><span>🖼 프로젝트 이미지</span></div>
                 <div class="project-content">
                     <div class="project-title">탕탕특공대</div>
                     <p class="project-desc"><strong>프로젝트 우당탕탕</strong><br><br>프로젝트를 의뢰하고 해결하는 과정을 통해 함께 성장하는 소셜 임팩트 웹사이트를 구축했습니다.</p>
                 </div>
             </div>
-            <div class="project-card fade-in" style="transition-delay: 0.1s;">
+            <div class="project-card fade-in" style="transition-delay: 0.1s;" onclick="openProjectModal(this)" data-github="https://github.com/project-doran">
                 <div class="project-image img-placeholder"><span>🖼 프로젝트 이미지</span></div>
                 <div class="project-content">
                     <div class="project-title">안무서운단대</div>
                     <p class="project-desc"><strong>도란도란</strong><br><br>은둔 청년에게 초기 일 경험과 소득을 제공하고, 말벗이 필요한 노인과 연결하는 세대 간 소통 기반 일자리 플랫폼입니다.</p>
                 </div>
             </div>
-            <div class="project-card fade-in" style="transition-delay: 0.2s;">
+            <div class="project-card fade-in" style="transition-delay: 0.2s;" onclick="openProjectModal(this)" data-github="https://github.com/project-bioimpact">
                 <div class="project-image img-placeholder"><span>🖼 프로젝트 이미지</span></div>
                 <div class="project-content">
                     <div class="project-title">마인드풀커넥트 소울팀</div>
                     <p class="project-desc"><strong>Bio-Impact</strong><br><br>사회적 기업 마인드풀커넥트와 협력해 정신건강 분야의 지속가능한 소셜 임팩트 솔루션을 도출하고 확산하는 프로젝트입니다.</p>
                 </div>
             </div>
-            <div class="project-card fade-in" style="transition-delay: 0.3s;">
+            <div class="project-card fade-in" style="transition-delay: 0.3s;" onclick="openProjectModal(this)" data-github="https://github.com/project-station">
                 <div class="project-image img-placeholder"><span>🖼 프로젝트 이미지</span></div>
                 <div class="project-content">
                     <div class="project-title">단풍</div>
@@ -338,6 +361,37 @@
         </div>
     </footer>
 
+    <!-- 프로젝트 상세 레이어 팝업 (모달) -->
+    <div id="projectModal" class="modal-overlay" onclick="closeProjectModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+            
+            <div class="modal-hero img-placeholder">
+                <span id="modalHeroPlaceholder">🖼 상단 와이드 프로젝트 배경 이미지</span>
+                <img id="modalHeroImage" src="" alt="Project Hero" style="display: none;">
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-left img-placeholder">
+                    <span id="modalDetailPlaceholder">📱 앱 화면 스크린샷 / 포스터</span>
+                    <img id="modalDetailImage" src="" alt="Project Detail" style="display: none;">
+                </div>
+                
+                <div class="modal-right">
+                    <h3 id="modalTitle" class="modal-title">프로젝트 타이틀</h3>
+                    <div id="modalDesc" class="modal-desc-text">프로젝트 상세 설명 영역입니다.</div>
+                    
+                    <div class="modal-footer-links">
+                        <a href="#" id="modalGithub" class="btn-github" target="_blank">
+                            <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                            GitHub 보러가기
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
@@ -360,6 +414,35 @@
                 observer.observe(element);
             });
         });
+
+        // 모달 팝업 제어 스크립트
+        function openProjectModal(element) {
+            const title = element.querySelector('.project-title').innerHTML;
+            const desc = element.querySelector('.project-desc').innerHTML;
+            const githubLink = element.getAttribute('data-github') || '#';
+            
+            document.getElementById('modalTitle').innerHTML = title;
+            
+            // 기존 요약 설명에 모달용 추가 안내 텍스트 덧붙이기
+            const extraDetail = '<br><br><h4 style="color:var(--primary-color); margin-bottom:10px;">📌 상세 내용</h4>해당 프로젝트는 다양한 전공생들이 협력하여 도출한 임팩트 창출 결과물입니다. 현장의 문제를 발굴하여 실제 솔루션으로 구현하기까지 수많은 회의와 리서치 과정을 거쳤습니다.';
+            document.getElementById('modalDesc').innerHTML = desc + extraDetail;
+            
+            document.getElementById('modalGithub').href = githubLink;
+
+            const modal = document.getElementById('projectModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 팝업 열렸을 때 배경 스크롤 방지
+        }
+
+        function closeProjectModal(event) {
+            // 이벤트 타겟이 모달 밖(오버레이)이거나 닫기 버튼인 경우에만 닫음
+            if (event && event.target.id !== 'projectModal' && !event.target.classList.contains('modal-close')) {
+                return;
+            }
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // 배경 스크롤 복구
+        }
     </script>
 </body>
 </html>
