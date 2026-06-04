@@ -64,7 +64,7 @@
         /* 비디오 컨테이너 (유튜브 16:9 반응형) */
         .video-container { position: relative; width: 100%; max-width: 900px; margin: 0 auto; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .video-container::before { content: ""; display: block; padding-top: 56.25%; }
-        .video-container iframe, .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
         /* 2. 교과 소개 & 3. 운영 방식 */
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -210,8 +210,8 @@
     <section id="video" class="container">
         <h2 class="section-title fade-in">생생한 현장 기록, 뜨거웠던 우리들의 기록</h2>
         <div class="video-container fade-in" style="transition-delay: 0.1s;">
-            <!-- 로컬 mp4 파일 연결 -->
-            <video src="./mp4/TechForImpact_2026.mp4" title="1학기 기록 영상" controls preload="metadata"></video>
+            <!-- 아래 src 주소의 YOUR_YOUTUBE_VIDEO_ID 부분을 실제 유튜브 영상 ID로 교체해주세요 -->
+            <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" title="1학기 기록 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <p class="fade-in" style="transition-delay: 0.2s; text-align: center; margin-top: 20px; color: var(--text-muted); font-size: 1.05rem;">
             치열하게 고민하고 쉴 틈 없이 달려온 학생들의 프로젝트 과정과 현장 스케치를 영상으로 만나보세요.
