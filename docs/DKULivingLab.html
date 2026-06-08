@@ -124,6 +124,16 @@
         .quote-author-avatars img:nth-child(2) { margin-left: -45px; }
         .quote-author-name { font-size: 1.15rem; font-weight: 700; color: var(--text-main); }
 
+        /* 8. 학생 참여 소감 */
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .testimonial-card { background: white; padding: 35px 30px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: transform 0.3s ease; }
+        .testimonial-card:hover { transform: translateY(-5px); }
+        .testimonial-card::before { content: '"'; position: absolute; top: 10px; left: 20px; font-size: 5rem; color: rgba(0, 64, 152, 0.05); line-height: 1; font-family: serif; }
+        .testimonial-text { font-size: 1.05rem; color: var(--text-main); line-height: 1.7; margin-bottom: 30px; position: relative; z-index: 1; word-break: keep-all; font-weight: 500; }
+        .testimonial-author { border-top: 2px solid var(--bg-light); padding-top: 15px; }
+        .author-name { font-weight: 700; color: var(--primary-color); font-size: 1.05rem; }
+        .author-role { font-size: 0.9rem; color: var(--text-muted); margin-top: 3px; }
+
         /* 8. 마무리 섹션 */
         footer { background: var(--text-main); color: white; padding: 60px 0; text-align: center; }
         footer p { max-width: 700px; margin: 0 auto; font-size: 1.05rem; opacity: 0.9; }
@@ -570,6 +580,35 @@
                     </div>
                     <div class="quote-author-name">정효정·이호준 교수</div>
                 </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="bg-gray">
+        <div class="container">
+            <h2 class="section-title fade-in">학생 참여 소감</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-in" style="transition-delay: 0.1s;">
+                    <p class="testimonial-text">"사회문제를 단지 고민하는 데 그치지 않고, 기획부터 개발까지 직접 솔루션을 만들어 볼 수 있어서 뜻깊었습니다. 팀원들과 밤낮없이 고민했던 시간이 가장 기억에 남습니다."</p>
+                    <div class="testimonial-author">
+                        <div class="author-name">최윤정 학생</div>
+                        <div class="author-role">안무서운단대 팀 / 컴퓨터공학과</div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in" style="transition-delay: 0.2s;">
+                    <p class="testimonial-text">"카카오 현직자 멘토님들의 실무적인 피드백 덕분에 프로젝트의 방향성을 명확히 하고 완성도를 높일 수 있었습니다. 학교 수업을 넘어선 생생한 현장의 시각을 배울 수 있는 소중한 경험이었습니다."</p>
+                    <div class="testimonial-author">
+                        <div class="author-name">이유나 학생</div>
+                        <div class="author-role">에스파 팀 / 전자전기공학부</div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in" style="transition-delay: 0.3s;">
+                    <p class="testimonial-text">"다른 전공의 학생들과 함께 팀을 이뤄 소통하며 정말 많은 것을 배웠습니다. 우리가 만든 서비스가 사회에 작은 임팩트라도 줄 수 있다는 사실에 큰 보람을 느꼈습니다."</p>
+                    <div class="testimonial-author">
+                        <div class="author-name">박희성 학생</div>
+                        <div class="author-role">마인드풀커넥트 소울팀 / 제약공학과</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
